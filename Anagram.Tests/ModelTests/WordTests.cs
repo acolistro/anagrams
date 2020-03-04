@@ -57,20 +57,32 @@ namespace Anagram.Tests
       // char[] word2Arr = {'b', 'r', 'e', 'a', 'd'};
       Word newWord1 = new Word(word1);
       Word newWord2 = new Word(word2);
-      Dictionary<string, char[]> newDictionary = new Dictionary<string, char[]>{ {word1, word1.ToCharArray()}, {word2, word2.ToCharArray()} };
+
+      Dictionary<string, char[]> newDictionary = new Dictionary<string, char[]>{ {"beard", word1.ToCharArray()}, {word2, word2.ToCharArray()} };
+
       newWord1.AddToDict(word1);
       newWord2.AddToDict(word2);
       Dictionary<string, char[]> result = Word.GetAll();
-      foreach(KeyValuePair<string, char[]> kvp in result)
-      {
-        Console.WriteLine("Key = {0}", kvp.Key);
-        foreach(char letter in kvp.Value)
-        {
-          Console.WriteLine("Letter = {0}", letter);
-        }
-      };
-      CollectionAssert.IsNotSubsetOf(result, newDictionary);
-      //fuctionality os correct but no test found to compare collection of collections.
+      // foreach(KeyValuePair<string, char[]> kvp in result)
+      // {
+      //   Console.WriteLine("Key = {0}", kvp.Key);
+      //   foreach(char letter in kvp.Value)
+      //   {
+      //     Console.WriteLine("Letter = {0}", letter);
+      //   }
+      // };
+      // foreach(KeyValuePair<string, char[]> kvp in newDictionary)
+      // {
+      //   Console.WriteLine("Key = {0}", kvp.Key);
+      //   foreach(char letter in kvp.Value)
+      //   {
+      //     Console.WriteLine("Letter = {0}", letter);
+      //   }
+      // };
+      CollectionAssert.AreEqual( newDictionary["beard"], result["beard"]);
+      CollectionAssert.AreEqual( newDictionary["bread"], result["bread"]);
+      CollectionAssert.AreEqual( newDictionary.Keys, result.Keys );
+      //fuctionality os correct but no test found to compare collection of collections. 
     }
   }
 
